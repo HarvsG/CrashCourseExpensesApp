@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-import 'package:intl/intl.dart';
-
 import './transaction_item.dart';
 import '../models/transaction.dart';
 
