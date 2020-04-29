@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 import 'package:intl/intl.dart';
+
+import './transaction_item.dart';
 import '../models/transaction.dart';
 
 class TransactionList extends StatelessWidget {
@@ -34,38 +36,7 @@ class TransactionList extends StatelessWidget {
               )
             : ListView.builder(
                 itemBuilder: (ctx, index) {
-                  return Card(
-                      elevation: 5,
-                      margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 5),
-                      child: ListTile(
-                        leading: CircleAvatar(
-                          radius: 30,
-                          child: Padding(
-                              padding: const EdgeInsets.all(10),
-                              child: FittedBox(
-                                  child:
-                                      Text('£${transactions[index].amount}'))),
-                        ),
-                        title: Text(
-                          transactions[index].title,
-                          style: Theme.of(context).textTheme.title,
-                        ),
-                        subtitle: Text(DateFormat.yMMMd()
-                            .format(transactions[index].date)),
-                        trailing: MediaQuery.of(context).size.width > 400
-                            ? FlatButton.icon(
-                                onPressed: () =>
-                                    deleteHandler(transactions[index].id),
-                                icon: const Icon(Icons.delete),
-                                textColor: Theme.of(context).errorColor,
-                                label: const Text('Delete'))
-                            : IconButton(
-                                icon: const Icon(Icons.delete),
-                                color: Theme.of(context).errorColor,
-                                onPressed: () =>
-                                    deleteHandler(transactions[index].id),
-                              ),
-                      ));
+                  return TransactionItem(transaction: transactions[index], deleteHandler: deleteHandler);
                 },
                 itemCount: transactions.length,
               ),
@@ -73,3 +44,5 @@ class TransactionList extends StatelessWidget {
     });
   }
 }
+
+
